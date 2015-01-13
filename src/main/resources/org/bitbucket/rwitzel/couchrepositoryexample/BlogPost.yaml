@@ -1,0 +1,16 @@
+_id : _design/BlogPost
+language : javascript
+views :
+    by_id :
+        map : |
+            function(doc) { 
+                if (doc.type == 'BlogPost') { 
+                    emit(doc._id, 
+                        { 
+                            _id : doc._id, 
+                            _rev: doc._rev 
+                        });
+                }
+            }
+        reduce : _count
+
